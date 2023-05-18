@@ -7,7 +7,7 @@
   
   <script lang="ts">
     export default {
-      name: 'Exp6',
+      name: 'Exp7',
     };
   </script>
   
