@@ -61,7 +61,7 @@
                 <a-input v-model:value="record.D" style="width:100px;" />
             </template>
             <template v-if="column.dataIndex === 'G' && tableData!==undefined">
-                <a-input v-model:value="record.G" style="width:100px;" />
+                {{ g(index) }}
             </template>
             <template v-if="column.dataIndex === 'C' && tableData!==undefined">
                 {{ c(index) }}
@@ -86,7 +86,7 @@
     <br>
 
     <div style="width:100%;text-align:right" >
-        <span  style="width:30%;display:inline-block" class="secondtitle">本实验最佳收益为为 </span>
+        <span  style="width:30%;display:inline-block" class="secondtitle">本实验最佳收益为:  </span>
         <span style="display:inline-block;font-size:20px;" >{{ SUM }}</span>
     </div>
     <br>
@@ -438,7 +438,6 @@ setup() {
             test: '0',
             SUM: 0,
             VAF: 0,
-            SUM_A: 0,
             columns: [     
                        {
                                     title: '序号',
@@ -603,9 +602,19 @@ setup() {
     computed: {
         c() {
             return function (index) {
+                let PAnum = 0
+                let rate = 1.12
+                let rate_i = 1
+                for (let i = 0; i < parseInt(this.tableData[index].B); i++){
+                    rate_i = 1
+                    for(let j = 0; j <= i; j++){
+                        rate_i = rate_i * rate
+                    }
+                    PAnum = PAnum + 1 / rate_i
+                }
                 console.log(typeof index)
-                this.tableData[index].C = (parseInt(this.tableData[index].A) ? parseInt(this.tableData[index].A) : 0) * parseInt(this.tableData[index].B)
-                return this.tableData[index].C
+                this.tableData[index].C =  ((parseInt(this.tableData[index].D)) ? (10000 - parseInt(this.tableData[index].A)) / PAnum + parseInt(this.tableData[index].A) * (rate - 1) : 0)
+                return this.tableData[index].C.toFixed(0)
             }
         },
          e() {
@@ -617,27 +626,43 @@ setup() {
                     n=n*j
                 }
                 this.tableData[index].E = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].D) : 0) /n
-                return this.tableData[index].E
+                return this.tableData[index].E.toFixed(0)
             }
         },
         f() {
             return function (index) {
               if(parseInt(this.tableData[index].B)==1){
-                this.tableData[index].F = (parseInt(this.tableData[index].E) ? parseInt(this.tableData[index].E) : 0) 
-                return this.tableData[index].F
+                this.tableData[index].F = (this.tableData[index].E ? this.tableData[index].E : 0) 
+                return this.tableData[index].F.toFixed(0)
                 }
                 else
                 {
-                 this.tableData[index].F = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].E) : 0) +parseInt(this.tableData[index-1].F)
-                 return this.tableData[index].F
+                 this.tableData[index].F = (this.tableData[index].D ? this.tableData[index].E : 0) + this.tableData[index-1].F
+                 return this.tableData[index].F.toFixed(0)
                 }
                 
+            }
+        },
+        g() {
+            return function (index) {
+                let PAnum = 0
+                let rate = 1.12
+                let rate_i = 1
+                for (let i = 0; i < parseInt(this.tableData[index].B); i++){
+                    rate_i = 1
+                    for(let j = 0; j <= i; j++){
+                        rate_i = rate_i * rate
+                    }
+                    PAnum = PAnum + 1 / rate_i
+                }
+                this.tableData[index].G =(this.tableData[index].F ? this.tableData[index].F : 0) / PAnum
+                return this.tableData[index].G.toFixed(0)
             }
         },
         i() {
             return function (index) {
                 this.tableData[index].I = (parseInt(this.tableData[index].G) ? parseInt(this.tableData[index].G) : 0) * parseInt(this.tableData[index].H)
-                return this.tableData[index].I
+                return this.tableData[index].I.toFixed(0)
             }
         },
         number() {
@@ -648,65 +673,18 @@ setup() {
         },
         unchanged() {
             return function (index) {
-                this.tableData[index].unchanged = (parseInt(this.tableData[index].C) ? parseInt(this.tableData[index].C) : 0) + (parseInt(this.tableData[index].F) ? parseInt(this.tableData[index].F) : 0) + (parseInt(this.tableData[index].I) ? parseInt(this.tableData[index].I) : 0)
+                this.tableData[index].unchanged = (parseInt(this.tableData[index].C) ? parseInt(this.tableData[index].C) : 0) + (parseInt(this.tableData[index].G) ? parseInt(this.tableData[index].G) : 0)
 
-                var sum = 0
-                for (var i = 0; i < 5; i++)
-                    sum += (parseInt(this.tableData[i].unchanged) ? parseInt(this.tableData[i].unchanged) : 0)
-                this.$data.SUM = sum
+                var arr = [this.tableData[0].unchanged,this.tableData[1].unchanged,this.tableData[2].unchanged,this.tableData[3].unchanged,
+                           this.tableData[4].unchanged,this.tableData[5].unchanged,this.tableData[6].unchanged,this.tableData[7].unchanged];
+                this.$data.SUM = Math.min(...arr)
 
-                return this.tableData[index].unchanged
+                return this.tableData[index].unchanged.toFixed(0)
             }
         },
-      
-        SUM_A(){
-            var sum = 0
-            for (var i = 0; i < 14; i++)
-                sum += (parseInt(this.dataadjust[i].grade) ? parseInt(this.dataadjust[i].grade) : 0)
-            return sum
-        },
-        ALL() {
-            return (this.$data.SUM * this.$data.VAF).toFixed(2)
-        }
     },
     methods: {
-        created() {
-            this.gettableData()
-        },
-        updated() {
-            // 用于防止表格合计行不显示
-            this.$nextTick(() => {
-                this.$refs['detailTable'].doLayout();
-            })
-        },
-        pdfHandle() {
-            window.open('/#/show', "_blank")
-        },
-        pdfHandle2() {
-            window.open('/#/show', "_blank")
-        },
-        getSummaries(param, val) {
-            const { columns, data } = param;
-            const sums = [];
-            columns.forEach((column, index) => {
-                if (index === 0) {
-                    sums[index] = (() => {
-                        
-                    })();
-                    return;
-                }
-                if (index === 11) {
-                    sums[index] = (() => {
-                        // let num=<p >￥{this.tableData[val].nonum.toFixed(2)}</p>
-                        // return num;
-                    })();
-                    return;
-                }
-            });
-            return sums;
-        },
-        count() {
-        },
+
     }
 }
 
