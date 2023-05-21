@@ -53,13 +53,42 @@
     />
 
   <h2>四、实验步骤  </h2>
-   <a-table
-    :columns="columns"
-    :data-source="data"
-    bordered
-    size="middle"
-    :scroll="{ x: 'calc(700px + 50%)', y: 500 }"
-  />
+  <a-table :pagination="false" :columns="columns" :data-source="tableData" bordered size="middle" style="word-break: break-all;">
+        <template #bodyCell="{ column, record, index }">
+            <template v-if="column.dataIndex === 'A' && tableData!==undefined">
+                <a-input v-model:value="record.A" style="width:100px; " />
+            </template>
+            <template v-if="column.dataIndex === 'D' && tableData!==undefined">
+                <a-input v-model:value="record.D" style="width:100px;" />
+            </template>
+            <template v-if="column.dataIndex === 'G' && tableData!==undefined">
+                <a-input v-model:value="record.G" style="width:100px;" />
+            </template>
+            <template v-if="column.dataIndex === 'C' && tableData!==undefined">
+                {{ c(index) }}
+            </template>
+            <template v-if="column.dataIndex === 'F' && tableData!==undefined">
+                {{ f(index) }}
+            </template>
+            <template v-if="column.dataIndex === 'I' && tableData!==undefined">
+                {{ i(index) }}
+            </template>
+            <template v-if="column.dataIndex === 'number' && tableData!==undefined">
+                {{ number(index) }}
+            </template>
+            <template v-if="column.dataIndex === 'unchanged' && tableData!==undefined">
+                {{ unchanged(index) }}
+            </template>
+        </template>
+    </a-table>
+    <br>
+
+    <div style="width:100%;text-align:right" >
+        <span  style="width:30%;display:inline-block" class="secondtitle">本实验最佳收益为为 </span>
+        <span style="display:inline-block;font-size:20px;" >{{ SUM }}</span>
+    </div>
+    <br>
+    <br>
    
 
 
@@ -74,8 +103,6 @@
 
 </template>
 
-
-
 <script lang="ts">
 import { Document } from '@element-plus/icons-vue'
 import { defineComponent } from 'vue'
@@ -83,87 +110,11 @@ import { defineComponent } from 'vue'
 
 
 
-
-type TableDataType = {
-  key: number;
-  name: string;
-  age: number;
-  street: string;
-  building: number;
-  number: number;
-  companyAddress: string;
-  companyName: string;
-  gender: string;
-};
 const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    width: 100,
-    fixed: 'left',
    
-    onFilter: (value: string, record: TableDataType) => record.name.indexOf(value) === 0,
-  },
-  {
-    
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        width: 100,
-        sorter: (a: TableDataType, b: TableDataType) => a.age - b.age,
-      },
-      {
-        
-            title: 'Street',
-            dataIndex: 'street',
-            key: 'street',
-            width: 200,
-          },
-          {
-           
-                title: 'O & M Costs for Year n',
-                dataIndex: 'building',
-                key: 'building',
-                width: 100,
-              },
-              {
-                title: 'PW(i) of O&M for Year n in Year 0',
-                dataIndex: 'number',
-                key: 'number',
-                width: 100,
-              },
-          
-  {
-
-        title: 'Company Address',
-        dataIndex: 'companyAddress',
-        key: 'companyAddress',
-        width: 200,
-      },
-      {
-        title: 'Company Name',
-        dataIndex: 'companyName',
-        key: 'companyName',
-      },
-      {
-        title: 'Company Name',
-        dataIndex: 'companyName',
-        key: 'companyName',
-      },
-
- 
 ];
 const data = [...Array(8)].map((_, i) => ({
-  key: i,
-  name: 'John Brown',
-  age: i + 1,
-  street: 'Lake Park',
-  building: i+1,
-  number: 2035,
-  companyAddress: 'Lake Street 42',
-  companyName: 'SoftLake Co',
-  gender: 'M',
+
 }));
 
 
@@ -469,10 +420,8 @@ const dataSource_PF = [
     rate_15:0.3269,
   },
 ];
-
-
-export default defineComponent({
-  setup() {
+export default {
+setup() {
     return {
       data,
       columns,
@@ -481,7 +430,274 @@ export default defineComponent({
       dataSource_PF,
     };
   },
-});
+    name: 'Exp7_SHENGMINGZHOUQI',
+    data() {
+        return {
+            test: '0',
+            SUM: 0,
+            VAF: 0,
+            SUM_A: 0,
+            columns: [     
+                       {
+                                    title: '序号',
+                                    dataIndex: 'B',
+                                    align: 'center',
+                                     width: 100,
+                            },
+                           {
+                    
+                                    title: 'Salvage Value If Retired at Year n',
+                                    width: 160,
+                                    dataIndex: 'A',
+                                    align: 'center'
+                            },
+                            {
+                                    title: 'AE(i) Cost If Retired in Year n [CR(i)]',
+                                    dataIndex: 'C',
+                                    width: 160,
+                                    align: 'center',
+                        },
+                        {
+                                    align: 'center',
+                                    dataIndex: 'D',
+                                    title: 'O & M Costs for Year n',
+                                     width: 100,
+                            },
+                            {
+                                    dataIndex: 'E',
+                                    align: 'center',
+                                    title: 'PW(i) of O&M for Year n in Year 0',
+                                    width: 160,
+                            },
+                            {
+                               
+                                    dataIndex: 'F',
+                                    title: 'Sum of Year 0 O&Ms through Year n',
+                                    align: 'center',
+                                    width: 160,
+                        },
+                        {
+                                    dataIndex: 'G',
+                                    align: 'center',
+                                    title: 'AE(i) Cost of Operating for n Years',
+                                     width: 160,
+                            },
+                         
+                {
+                    title: 'Total AE(i) If Retired at Year n',
+                    dataIndex: 'unchanged',
+                    key: 'unchanged',
+                    align: 'center',
+                    //  width: 100,
+                    // fixed: 'right',
+                },
+            ],
+          
+            tableData: [
+                {
+                    component: '1',
+                    number: '',
+                    A: '',
+                    B: '1',
+                    C: '',
+                    D: '',
+                    E: '4',
+                    F: '',
+                    G: '',
+                    
+                    unchanged: '',
+                },
+                {
+                    component: '2',
+                    number: '',
+                    A: '',
+                    B: '2',
+                    C: '',
+                    D: '',
+                    E: '5',
+                    F: '',
+                    G: '',
+                    
+                    unchanged: '',
+                },
+                {
+                    component: '3',
+                    number: '',
+                    A: '',
+                    B: '3',
+                    C: '',
+                    D: '',
+                    E: '4',
+                    F: '',
+                    G: '',
+                   
+                    unchanged: '',
+                },
+                {
+                    component: '4',
+                    number: '',
+                    A: '',
+                    B: '4',
+                    C: '',
+                    D: '',
+                    E: '10',
+                    F: '',
+                    G: '',
+                  
+                    unchanged: '',
+                },
+                {
+                    component: '5',
+                    number: '',
+                    A: '',
+                    B: '5',
+                    C: '',
+                    D: '',
+                    E: '7',
+                    F: '',
+                    G: '',
+                   
+                    unchanged: '',
+                },
+                 {
+                    component: '6',
+                    number: '',
+                    A: '',
+                    B: '6',
+                    C: '',
+                    D: '',
+                    E: '7',
+                    F: '',
+                    G: '',
+                    unchanged: '',
+                },
+                 {
+                    component: '7',
+                    number: '',
+                    A: '',
+                    B: '7',
+                    C: '',
+                    D: '',
+                    E: '7',
+                    F: '',
+                    G: '',
+                    unchanged: '',
+                },
+                 {
+                    component: '8',
+                    number: '',
+                    A: '',
+                    B: '8',
+                    C: '',
+                    D: '',
+                    E: '7',
+                    F: '',
+                    G: '',
+                    unchanged: '',
+                },
+            ],
+        }
+    },
+    computed: {
+        c() {
+            return function (index) {
+                console.log(typeof index)
+                this.tableData[index].C = (parseInt(this.tableData[index].A) ? parseInt(this.tableData[index].A) : 0) * parseInt(this.tableData[index].B)
+                return this.tableData[index].C
+            }
+        },
+        f() {
+            return function (index) {
+                this.tableData[index].F = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].D) : 0) * parseInt(this.tableData[index].E)
+                return this.tableData[index].F
+            }
+        },
+        i() {
+            return function (index) {
+                this.tableData[index].I = (parseInt(this.tableData[index].G) ? parseInt(this.tableData[index].G) : 0) * parseInt(this.tableData[index].H)
+                return this.tableData[index].I
+            }
+        },
+        number() {
+            return function (index) {
+                this.tableData[index].number = (parseInt(this.tableData[index].A) ? parseInt(this.tableData[index].A) : 0) + (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].D) : 0) + (parseInt(this.tableData[index].G) ? parseInt(this.tableData[index].G) : 0)
+                return this.tableData[index].number
+            }
+        },
+        unchanged() {
+            return function (index) {
+                this.tableData[index].unchanged = (parseInt(this.tableData[index].C) ? parseInt(this.tableData[index].C) : 0) + (parseInt(this.tableData[index].F) ? parseInt(this.tableData[index].F) : 0) + (parseInt(this.tableData[index].I) ? parseInt(this.tableData[index].I) : 0)
+
+                var sum = 0
+                for (var i = 0; i < 5; i++)
+                    sum += (parseInt(this.tableData[i].unchanged) ? parseInt(this.tableData[i].unchanged) : 0)
+                this.$data.SUM = sum
+
+                return this.tableData[index].unchanged
+            }
+        },
+        VAF() {
+            var vaf = 0
+            // console.log('111',this.$data.tableData)
+            for (var i = 0; i < 14; i++)
+                vaf += (parseInt(this.dataadjust[i].grade) ? parseInt(this.dataadjust[i].grade) : 0)
+            
+            vaf = vaf*0.01 + 0.65
+            this.$data.VAF = vaf.toFixed(2)
+            return vaf
+        },
+        SUM_A(){
+            var sum = 0
+            for (var i = 0; i < 14; i++)
+                sum += (parseInt(this.dataadjust[i].grade) ? parseInt(this.dataadjust[i].grade) : 0)
+            return sum
+        },
+        ALL() {
+            return (this.$data.SUM * this.$data.VAF).toFixed(2)
+        }
+    },
+    methods: {
+        created() {
+            this.gettableData()
+        },
+        updated() {
+            // 用于防止表格合计行不显示
+            this.$nextTick(() => {
+                this.$refs['detailTable'].doLayout();
+            })
+        },
+        pdfHandle() {
+            window.open('/#/show', "_blank")
+        },
+        pdfHandle2() {
+            window.open('/#/show', "_blank")
+        },
+        getSummaries(param, val) {
+            const { columns, data } = param;
+            const sums = [];
+            columns.forEach((column, index) => {
+                if (index === 0) {
+                    sums[index] = (() => {
+                        // let el=<p>未调整功能点</p>
+                    })();
+                    return;
+                }
+                if (index === 11) {
+                    sums[index] = (() => {
+                        // let num=<p >￥{this.tableData[val].nonum.toFixed(2)}</p>
+                        // return num;
+                    })();
+                    return;
+                }
+            });
+            return sums;
+        },
+        count() {
+        },
+    }
+}
+
+
 
 
 </script>
