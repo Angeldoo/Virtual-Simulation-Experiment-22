@@ -66,6 +66,9 @@
             <template v-if="column.dataIndex === 'C' && tableData!==undefined">
                 {{ c(index) }}
             </template>
+             <template v-if="column.dataIndex === 'E' && tableData!==undefined">
+                {{ e(index) }}
+            </template>
             <template v-if="column.dataIndex === 'F' && tableData!==undefined">
                 {{ f(index) }}
             </template>
@@ -500,7 +503,7 @@ setup() {
                     B: '1',
                     C: '',
                     D: '',
-                    E: '4',
+                    E: '',
                     F: '',
                     G: '',
                     
@@ -513,7 +516,7 @@ setup() {
                     B: '2',
                     C: '',
                     D: '',
-                    E: '5',
+                    E: '',
                     F: '',
                     G: '',
                     
@@ -526,7 +529,7 @@ setup() {
                     B: '3',
                     C: '',
                     D: '',
-                    E: '4',
+                    E: '',
                     F: '',
                     G: '',
                    
@@ -539,7 +542,7 @@ setup() {
                     B: '4',
                     C: '',
                     D: '',
-                    E: '10',
+                    E: '',
                     F: '',
                     G: '',
                   
@@ -552,7 +555,7 @@ setup() {
                     B: '5',
                     C: '',
                     D: '',
-                    E: '7',
+                    E: '',
                     F: '',
                     G: '',
                    
@@ -565,7 +568,7 @@ setup() {
                     B: '6',
                     C: '',
                     D: '',
-                    E: '7',
+                    E: '',
                     F: '',
                     G: '',
                     unchanged: '',
@@ -577,7 +580,7 @@ setup() {
                     B: '7',
                     C: '',
                     D: '',
-                    E: '7',
+                    E: '',
                     F: '',
                     G: '',
                     unchanged: '',
@@ -589,7 +592,7 @@ setup() {
                     B: '8',
                     C: '',
                     D: '',
-                    E: '7',
+                    E: '',
                     F: '',
                     G: '',
                     unchanged: '',
@@ -605,10 +608,30 @@ setup() {
                 return this.tableData[index].C
             }
         },
+         e() {
+            return function (index) {
+                console.log(typeof index)
+                let j=1.12
+                let n=1
+                for(let i=0;i<parseInt(this.tableData[index].B);i++){
+                    n=n*j
+                }
+                this.tableData[index].E = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].D) : 0) /n
+                return this.tableData[index].E
+            }
+        },
         f() {
             return function (index) {
-                this.tableData[index].F = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].D) : 0) * parseInt(this.tableData[index].E)
+              if(parseInt(this.tableData[index].B)==1){
+                this.tableData[index].F = (parseInt(this.tableData[index].E) ? parseInt(this.tableData[index].E) : 0) 
                 return this.tableData[index].F
+                }
+                else
+                {
+                 this.tableData[index].F = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].E) : 0) +parseInt(this.tableData[index-1].F)
+                 return this.tableData[index].F
+                }
+                
             }
         },
         i() {
@@ -635,16 +658,7 @@ setup() {
                 return this.tableData[index].unchanged
             }
         },
-        VAF() {
-            var vaf = 0
-            // console.log('111',this.$data.tableData)
-            for (var i = 0; i < 14; i++)
-                vaf += (parseInt(this.dataadjust[i].grade) ? parseInt(this.dataadjust[i].grade) : 0)
-            
-            vaf = vaf*0.01 + 0.65
-            this.$data.VAF = vaf.toFixed(2)
-            return vaf
-        },
+      
         SUM_A(){
             var sum = 0
             for (var i = 0; i < 14; i++)
@@ -677,7 +691,7 @@ setup() {
             columns.forEach((column, index) => {
                 if (index === 0) {
                     sums[index] = (() => {
-                        // let el=<p>未调整功能点</p>
+                        
                     })();
                     return;
                 }
