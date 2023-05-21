@@ -1,5 +1,9 @@
 <template>
   <h2>一、实验目的  </h2>
+  <p class="text">软件经济生命周期计算是一种用于评估软件产品在其整个生命周期中的经济效益和成本的方法。该实验的目的是通过进行软件经济生命周期计算，
+                   以评估软件产品的经济可行性，并为软件开发和维护过程中的决策提供依据。
+                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </P>
   <h2>二、实验内容  </h2>
 
   <h2>三、实验原理  </h2>
@@ -49,13 +53,17 @@
     />
 
   <h2>四、实验步骤  </h2>
-  <a-table
+   <a-table
     :columns="columns"
     :data-source="data"
     bordered
     size="middle"
     :scroll="{ x: 'calc(700px + 50%)', y: 500 }"
   />
+   
+
+
+
   <h2>五、实验结果  </h2>
   <h2>六、实验思考  </h2>
   <a-button class="button3" type="primary" shape="round">
@@ -73,12 +81,15 @@ import { Document } from '@element-plus/icons-vue'
 import { defineComponent } from 'vue'
 
 
+
+
+
 type TableDataType = {
   key: number;
   name: string;
   age: number;
   street: string;
-  building: string;
+  building: number;
   number: number;
   companyAddress: string;
   companyName: string;
@@ -111,13 +122,13 @@ const columns = [
           },
           {
            
-                title: 'Building',
+                title: 'O & M Costs for Year n',
                 dataIndex: 'building',
                 key: 'building',
                 width: 100,
               },
               {
-                title: 'Door No.',
+                title: 'PW(i) of O&M for Year n in Year 0',
                 dataIndex: 'number',
                 key: 'number',
                 width: 100,
@@ -148,7 +159,7 @@ const data = [...Array(8)].map((_, i) => ({
   name: 'John Brown',
   age: i + 1,
   street: 'Lake Park',
-  building: 'C',
+  building: i+1,
   number: 2035,
   companyAddress: 'Lake Street 42',
   companyName: 'SoftLake Co',
