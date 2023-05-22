@@ -4,7 +4,9 @@
                    以评估软件产品的经济可行性，并为软件开发和维护过程中的决策提供依据。
                     </P>
   <h2>二、实验内容  </h2>
-
+  <p class="text">在了解软件生命周期定义的基础上，理解软件的成本与利润如何受到影响，根据相关值与对应系数，计算出资本回收与运维费用，填入表格，
+                  找到和为最小值，即最佳收益的年份，得到所求软件的生命周期。
+                    </P>
   <h2>三、实验原理  </h2>
     <p class="secondtitle">1.软件生命周期</p>
     <p class="text">软件生命周期(Software Life Cycle,SLC)是软件的产生直到报废或停止使用的生命周期。周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、
@@ -96,7 +98,20 @@
 
 
   <h2>五、实验结果  </h2>
+  <p class="text">通过实验步骤计算，得到表格数据。其中成本最低，最佳收益值为:
+  </P>
+  <p class="text">最佳收益的年份为:
+ </P>
+
   <h2>六、实验思考  </h2>
+  <p class="text">软件生命周期又称为软件生存周期或系统开发生命周期，是软件的产生直到报废的生命周期，
+    周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、验收与运行、维护升级到废弃等阶段，
+    这种按时间分程的思想方法是软件工程中的一种思想原则，即按部就班、逐步推进，每个阶段都要有定义、工作、
+    审查、形成文档以供交流或备查，以提高软件的质量。
+    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    根据实验结果，可以得到运维成本与资金回收之和，即Total AE（i），呈现出随年份先下降后上升的趋势，这是由
+    逐渐降低的资本回收与折现过上升的运维成本共同影响决定。找出其中最佳收益及其年份，即得到软件的经济生命周期。
+  </P>
   <a-button class="button3" type="primary" shape="round">
         <template >
             <DownloadOutlined />
@@ -108,9 +123,6 @@
 <script lang="ts">
 import { Document } from '@element-plus/icons-vue'
 import { defineComponent } from 'vue'
-
-
-
 
 const columns = [
    
@@ -424,6 +436,7 @@ const dataSource_PF = [
 ];
 export default {
 setup() {
+
     return {
       data,
       columns,
@@ -684,11 +697,8 @@ setup() {
         },
     },
     methods: {
-
     }
 }
-
-
 
 
 </script>
