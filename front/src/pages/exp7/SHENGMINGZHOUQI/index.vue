@@ -4,9 +4,23 @@
                    以评估软件产品的经济可行性，并为软件开发和维护过程中的决策提供依据。
                     </P>
   <h2>二、实验内容  </h2>
-  <p class="text">在了解软件生命周期定义的基础上，理解软件的成本与利润如何受到影响，根据相关值与对应系数，计算出资本回收与运维费用，填入表格，
-                  找到和为最小值，即最佳收益的年份，得到所求软件的生命周期。
-                    </P>
+  <p class="text">步骤1: 确定资本回收 CR(i) 和运维费用 O&M Cost 的相关值和对应系数。
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  步骤2: 使用计算公式计算资本回收 CR(i)：CR(i) = (P - F) * (A/P,i,n) + F * i
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  步骤3: 填写表格，记录每个年份的残值 （Salvage Value If Retired at Year n）、资本回收 CR(i) 、年度运维费用（O & M Costs for Year n）和折现的运维费用 PW(i) of O&M for Year n in Year 0 。
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  步骤4: 计算每个年份的运维成本的累加值（Sum of Year 0 O&Ms through Year n）和运维成本的折现值 AE(i) Cost of Operating for n Years 。
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  步骤5: 计算每个年份的总经济成本（Total AE(i) If Retired at Year n），即运维成本和资本回收的和。
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  步骤6: 找到总经济成本最小的年份，即为所求软件的生命周期年份。
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  步骤7: 将计算结果填入表格，并分析结果。分析实验结果，根据最佳收益年份，评估软件产品的经济可行性。撰写实验报告，包括实验目的、步骤、结果分析和结论。
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </p>
+                    <!-- 在了解软件生命周期定义的基础上，理解软件的成本与利润如何受到影响，根据相关值与对应系数，计算出资本回收与运维费用，填入表格，
+                       找到和为最小值，即最佳收益的年份，得到所求软件的生命周期。 -->
   <h2>三、实验原理  </h2>
     <p class="secondtitle">1.软件生命周期</p>
     <p class="text">软件生命周期(Software Life Cycle,SLC)是软件的产生直到报废或停止使用的生命周期。周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、
