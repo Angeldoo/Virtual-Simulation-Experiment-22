@@ -1,74 +1,107 @@
 <template>
-  <h2>一、实验目的  </h2>
-  <p class="text">软件经济生命周期计算是一种用于评估软件产品在其整个生命周期中的经济效益和成本的方法。该实验的目的是通过进行软件经济生命周期计算，
-                   以评估软件产品的经济可行性，并为软件开发和维护过程中的决策提供依据。
-                    </P>
-  <h2>二、实验内容  </h2>
-  <p class="text">步骤1: 确定资本回收 CR(i) 和运维费用 O&M Cost 的相关值和对应系数。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤2: 使用计算公式计算资本回收 CR(i)：CR(i) = (P - F) * (A/P,i,n) + F * i
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤3: 填写表格，记录每个年份的残值 （Salvage Value If Retired at Year n）、资本回收 CR(i) 、年度运维费用（O & M Costs for Year n）和折现的运维费用 PW(i) of O&M for Year n in Year 0 。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤4: 计算每个年份的运维成本的累加值（Sum of Year 0 O&Ms through Year n）和运维成本的折现值 AE(i) Cost of Operating for n Years 。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤5: 计算每个年份的总经济成本（Total AE(i) If Retired at Year n），即运维成本和资本回收的和。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤6: 找到总经济成本最小的年份，即为所求软件的生命周期年份。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤7: 将计算结果填入表格，并分析结果。分析实验结果，根据最佳收益年份，评估软件产品的经济可行性。撰写实验报告，包括实验目的、步骤、结果分析和结论。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                    <!-- 在了解软件生命周期定义的基础上，理解软件的成本与利润如何受到影响，根据相关值与对应系数，计算出资本回收与运维费用，填入表格，
-                       找到和为最小值，即最佳收益的年份，得到所求软件的生命周期。 -->
-  <h2>三、实验原理  </h2>
-    <p class="secondtitle">1.软件生命周期</p>
-    <p class="text">软件生命周期(Software Life Cycle,SLC)是软件的产生直到报废或停止使用的生命周期。周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、
-                    验收与运行、维护升级到废弃等阶段，这种按时间分程的思想方法是软件工程中的一种思想原则，即按部就班、逐步推进，每个阶段都要有定义、工作、审查、
-                    形成文档以供交流或备查，以提高软件的质量。典型的几种生命周期模型包括瀑布模型、快速原型模型、迭代模型。 
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    软件的成本主要包括两部分：资本回收CR(i)与运维成本O&M Cost。CR(i)通常会在开始时会很高，并随着时间的推移而减少。资产的运营和维护成本通常一开始较低，并随着时间的推移而增加。
-                    本实验就是要计算软件测试开始后，成本最低的年份，在该年停止使用软件可以获得的利润最大。
-                    </P>
-    <p class="secondtitle">2.经济学相关概念</p>
-    <p class="text">2.1 残值salvage value：是指在一项资产使用期满时预计能够回收到的残余价值，也就是在固定资产使用期满报废时处置资产所能收取的价款。
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    2.2 (A/P,i,n)：表示资金回收系数。与年金现值系数(P/A,i,n)互为倒数。年资本回收额：指在约定年限内等额回收初始投入资本或清偿所欠债务的金额。年资本回收额的计算实际上是已知普通年金现值P，求年金A。A=P*(A/P,i,n) =P/(P/A,i,n) 
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    2.3 (P/F,i,n)：复利现值系数，(P/F,i,n) = 1 / (1 + i)^n。复利现值的计算公式为：P = F * (P/F,i,n)。
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    2.4 CR(i)：资本回收。由两部分组成：（1）资产价值随着时间流逝的下降值；（2）如果把资产残值存入银行中在第i年会得到的利息值（隐形成本）。计算方式为：P * (A/P,i,n) - F * (A/F,i,n) + F * i，为了简化计算，可化为(P - F) * (A/P,i,n) + F * i
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    2.5 Present worth: 费用现值，用于计算回报率；AE: anual equivalent，每年折算值。
-                    </p> 
-    <p class="secondtitle">3.相关计算方法</p>
-    <p class="text">3.1 CR(i)：资本回收，计算公式：(P - F) * (A/P,i,n) + F * i = (P - F) / (P/A,i,n) + F * i；
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    3.2 PW(i) of O&M for Year n in Year 0：将第n年的运维金额折现成第0年的运维费用，计算公式：O&M * (P/F,i,n)；
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    3.3 AE(i) Cost of Operating for n Years：n年运维的成本折现到第n年，计算公式：Sum * (A/P,i,n) 或 Sum / (P/A,i,n)；
-                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    3.4 Total AE(i) If Retired at Year n：运维成本与资本回收之和，最小值所在年份即为要求年份。
-                    </p>
-    <p class="secondtitle">4.年金现值系数(P/A,i,n)表</p>
-    <a-table
-      :columns="columns_PA"
-      :data-source="dataSource_PA"
-      bordered
-      size="middle"
-      pagination="false"
-    />
-    <p class="secondtitle">5.复利现值系数(P/F,i,n)表</p>
-    <a-table
-      :columns="columns_PA"
-      :data-source="dataSource_PF"
-      bordered
-      size="middle"
-      pagination="false"
-    />
+    <!-- <span> {{ test }}</span> -->
+    <!-- <h2>一、实验目的  </h2>
+    <p class="content">理解软件项目规模度量功能点法原理，通过实验操作掌握功能点法。 学生应以小组为单位，根据本小组“软件工程管理与经济”课程设计项目架构及组件等设计成果，以功能点方法测量该项目的规模(功能点数量)。 建议选用某一种功能点方法度量课程设计项目的功能点，并采用另外一种功能点方法或其他的软件规模度量方法对前一种方法的度量结果进行验证。 本实验为课内设计性实验项目，实验学时 1 学时，完成实验报告 1 学时。
+    </p> -->
+    <h2>一、实验步骤 </h2>
+    <!-- <p class="content" > -->
+    <p class="secondtitle">第一步：识别数据功能点和事务处理功能点</p>
+    <p class="content">数据功能是指更新、引用和检索而储存的可用的逻辑数据。数据块及控制信
+        息是逻辑上的并且用户可确认的。数据功能分为内部逻辑文件(ILF)和外部接口
+        文件(EIF)。事务处理是指外部输入、外部输出、外部查询、完成更新、检索和输
+        出等操作，分为外部输入(EI)、外部输出(EO)和外部查询(EQ)。
+        <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请详细阅读文档中提供的系统设计模型。
+    </p>
 
-  <h2>四、实验步骤  </h2>
-  <a-table :pagination="false" :columns="columns" :data-source="tableData" bordered size="middle" style="word-break: break-all;">
+    <p class="secondtitle">第二步：测量内部逻辑文件(ILF)</p>
+    <p class="content">内部逻辑文件(ILF)是用户可确认的，在应用程序内部维护、逻辑上相关的数
+        据块或控制信息。内部逻辑文件(ILF)用来保存经由应用程序的一个或多个处理
+        后的数据。一旦应用程序内部的一个数据块被标识为 ILF，即使它被另一个事务
+        处理所引用，它也不能再被同一个应用程序当作 EIF。<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：清点实验案例中 ILF 数量。</p>
+
+    <p class="secondtitle">第三步：测量外部接口文件(EIF) </p>
+    <p class="content">外部接口文件(EIF)是用户可确认的、由被测应用程序引用，但在其他应用程
+        序内部维护的、逻辑上相关的数据块或控制信息。外部接口文件(EIF)用来存放被
+        测应用程序中的一个或多个基本处理所引用的数据。数据或控制数据通过诸如增
+        加、变更、更新等事务来维护，一个 EIF 可以被多个应用程序引用和计算，但是
+        对于一个应用程序来讲，一个 EIF 只应被计算一次。 <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：清点实验案例中 EIF 数量。</p>
+
+
+    <p class="secondtitle">第四步：计算 ILF 和 EIF 复杂度</p>
+    <p class="content">根据 IFPUG 功能点计算实践手册(4.1 版)，识别 ILF 和 EIF 组件的复杂程度，
+        并按照下表的参数并赋值(简单、平均或复杂)。 <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：复杂度为简单的 ILF 数量和复杂的 ILF 数量各占 50%。EIF 的复
+        杂度均为复杂。填写下表。</p>
+    <h2 style="text-align: center">ILF 和 EIF 数据复杂度认定表</h2>
+    <a-table :pagination="false" :columns="columns1" :data-source="tableData1" bordered size="middle" style="word-break: break-all;" />
+    <br>
+
+    <p class="secondtitle">第五步：测量外部输入(EI)</p>
+    <p class="content">外部输入(EI)是应用程序处理来自系统边界以外的数据或控制信息的基本
+        过程。EI 的作用是维护一个或多个 ILF 以及通过其处理逻辑来改变系统的行为。<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：清点实验案例中 EI 数量。 </p>
+
+
+    <p class="secondtitle">第五步：测量外部输入(EI)</p>
+    <p class="content">外部输入(EI)是应用程序处理来自系统边界以外的数据或控制信息的基本
+        过程。EI 的作用是维护一个或多个 ILF 以及通过其处理逻辑来改变系统的行为。<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：清点实验案例中 EI 数量。 </p>
+
+
+    <p class="secondtitle">第六步：测量外部输出(EO) </p>
+    <p class="content">外部输出(EO)是应用程序向其边界之外提供数据或控制信息的基本处理。
+        EO 的作用是向用户提供经过处理逻辑加工的，除了检索信息或控制信息之外的
+        信息或附加信息。处理逻辑中必须至少包含一个数学公式或者计算，创建导出数
+        据或者维护一个或多个 ILF，并且改变系统的行为。<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：清点实验案例中 EO 数量。 </p>
+
+    <p class="secondtitle">第七步：测量外部查询(EQ) </p>
+    <p class="content">外部查询(EQ)是应用程序向其边界之外提供数据或控制信息查询的基本处
+        理。EQ 的作用是通过查询数据或控制信息来为用户提供信息，处理逻辑中既不
+        包含数学公式或计算，也不产生导出数据。处理过程中不维护 ILF，系统行为不
+        受影响。<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：清点实验案例中 EQ 数量。 </p>
+
+
+    <p class="secondtitle">第八步：计算 EI、EO 和 EQ 复杂度 </p>
+    <p class="content">根据 IFPUG 功能点计算实践手册(4.1 版)，分别识别 EI 以及 EO 和 EQ 组件
+        的复杂程度，并按照以下两个表格的参数并赋值(简单、平均或复杂)。<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：复杂度为简单的 EI 数量和复杂的 EI 数量各占 50%。复杂度为平
+        均的 EO 数量占 2/3，复杂度为复杂的 EO 数量占 1/3。复杂度为简单、平均和复
+        杂的 EQ 数量各占 1/3。</p>
+    <h2 style="text-align: center">EI 复杂度认定表</h2>
+    <a-table :pagination="false" :columns="columns2" :data-source="tableData2" bordered size="middle" style="word-break: break-all;" />
+    <br>
+
+    <h2 style="text-align: center">EO 和 EQ 复杂度认定表</h2>
+    <a-table :pagination="false" :columns="columns3" :data-source="tableData3" bordered size="middle" style="word-break: break-all;" />
+    <br>
+
+    <p class="secondtitle">第九步：计算未调整功能点 </p>
+    <p class="content"> 按照 IFPUG 功能点计算实践手册(4.1 版)组件复杂度等级与功能点数对应关
+        系表 4，计算得到未调整功能点数(UFP)。 <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：将上述各步得到的数据，填写在下面的“未调整功能点计算表”中
+        的合适位置，计算本实验案例的未调整功能点。 </p>
+
+
+    <p class="secondtitle">第十步：计算调整后功能点 </p>
+    <p class="content">考虑本实验案例的非功能性，从表 6 采集相对复杂度调整因子(标红数值)，
+        得到本实验案例的功能点调整因子(VAF)为 41。将 VAF 数值代入(IFPUG 法)功能
+        点计算公式，计算得到本实验案例的功能点为_____________。 <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验操作：运用 IFPUG 标准规则，计算实验案例的调整后功能点。 </p>
+    <br />
+    <h2 style="text-align: center">每个组件复杂度等级与功能点数对应关系表 </h2>
+    <a-table :pagination="false" :columns="columns4" :data-source="tableData4" bordered size="middle" style="word-break: break-all;" />
+    <br>
+
+
+
+    <h2>二、实验参数 </h2>
+
+    <h2 style="text-align: center;">表1：未调整功能点计算表 </h2>
+    <a-table :pagination="false" :columns="columns" :data-source="tableData" bordered size="middle" style="word-break: break-all;">
         <template #bodyCell="{ column, record, index }">
             <template v-if="column.dataIndex === 'A' && tableData!==undefined">
                 <a-input v-model:value="record.A" style="width:100px; " />
@@ -77,13 +110,10 @@
                 <a-input v-model:value="record.D" style="width:100px;" />
             </template>
             <template v-if="column.dataIndex === 'G' && tableData!==undefined">
-                {{ g(index) }}
+                <a-input v-model:value="record.G" style="width:100px;" />
             </template>
             <template v-if="column.dataIndex === 'C' && tableData!==undefined">
                 {{ c(index) }}
-            </template>
-             <template v-if="column.dataIndex === 'E' && tableData!==undefined">
-                {{ e(index) }}
             </template>
             <template v-if="column.dataIndex === 'F' && tableData!==undefined">
                 {{ f(index) }}
@@ -102,594 +132,653 @@
     <br>
 
     <div style="width:100%;text-align:right" >
-        <span  style="width:30%;display:inline-block" class="secondtitle">本实验最佳收益为:  </span>
+        <span  style="width:30%;display:inline-block" class="secondtitle">本实验未调整功能点总计为 </span>
         <span style="display:inline-block;font-size:20px;" >{{ SUM }}</span>
     </div>
     <br>
     <br>
-   
 
+    <h2 style="text-align: center;">表2：系统特征因子表及计算表 </h2>
+    <a-table :columns="columnsadjust" :pagination="false" :data-source="dataadjust" bordered size="middle" style="word-break: break-all;">
+        <template #bodyCell="{ column, record }">
+            <template v-if="column.dataIndex === 'grade'">
+                <a-input-group compact>
+                    <a-select v-model:value="record.grade">
+                        <a-select-option value="0">0</a-select-option>
+                        <a-select-option value="1">1</a-select-option>
+                        <a-select-option value="2">2</a-select-option>
+                        <a-select-option value="3">3</a-select-option>
+                        <a-select-option value="4">4</a-select-option>
+                        <a-select-option value="5">5</a-select-option>
+                    </a-select>
 
+                </a-input-group>
 
-  <h2>五、实验结果  </h2>
-  <p class="text">通过实验步骤计算，得到表格数据。其中成本最低，最佳收益值为:
-  </P>
-  <p class="text">最佳收益的年份为:
- </P>
+            </template>
+        </template>
+    </a-table>
+    <br>
+    <div style="width:100%;text-align:right" >
+        <span  style="width:30%;display:inline-block" class="secondtitle">合计数 </span>
+        <span style="display:inline-block;font-size:20px;" >{{ SUM_A }}</span>
+    </div>
+    <br>
+    <br>
 
-  <h2>六、实验思考  </h2>
-  <p class="text">软件生命周期又称为软件生存周期或系统开发生命周期，是软件的产生直到报废的生命周期，
-    周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、验收与运行、维护升级到废弃等阶段，
-    这种按时间分程的思想方法是软件工程中的一种思想原则，即按部就班、逐步推进，每个阶段都要有定义、工作、
-    审查、形成文档以供交流或备查，以提高软件的质量。
-    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    根据实验结果，可以得到运维成本与资金回收之和，即Total AE（i），呈现出随年份先下降后上升的趋势，这是由
-    逐渐降低的资本回收与折现过上升的运维成本共同影响决定。找出其中最佳收益及其年份，即得到软件的经济生命周期。
-  </P>
-  <a-button class="button3" type="primary" shape="round">
+    <span class="secondtitle">功能点调整因子(VAF)为 </span>
+    <span style="font-size:20px">{{ VAF }}</span>
+    <br /><br />
+    <span class="secondtitle">本实验案例的功能点为</span>
+    <span style="font-size:20px">{{ ALL }}</span>
+    <br /><br />
+    <a-button class="button3" type="primary" shape="round">
         <template >
             <DownloadOutlined />
         </template>实验报告提交
     </a-button>
-
 </template>
 
+
+
 <script lang="ts">
-import { Document } from '@element-plus/icons-vue'
 import { defineComponent } from 'vue'
-
-const columns = [
-   
-];
-const data = [...Array(8)].map((_, i) => ({
-
-}));
-
-
-interface DataType {
-  key: string;
-  Year_data: float;
-  rate_6: float;
-  rate_7: float;
-  rate_8: float;
-  rate_9: float;
-  rate_10: float;
-  rate_11: float;
-  rate_12: float;
-  rate_13: float;
-  rate_14: float;
-  rate_15: float;
-}
-
-const columns_PA = [
-  {
-    title: '期数',
-    dataIndex: 'Year_data',
-    key: 'Year_data',
-  },
-  {
-    title: '6%',
-    dataIndex: 'rate_6',
-    key: 'rate_6',
-  },
-  {
-    title: '7%',
-    dataIndex: 'rate_7',
-    key: 'rate_7',
-  },
-  {
-    title: '8%',
-    dataIndex: 'rate_8',
-    key: 'rate_8',
-  },
-  {
-    title: '9%',
-    dataIndex: 'rate_9',
-    key: 'rate_9',
-  },
-  {
-    title: '10%',
-    dataIndex: 'rate_10',
-    key: 'rate_10',
-  },
-  {
-    title: '11%',
-    dataIndex: 'rate_11',
-    key: 'rate_11',
-  },
-  {
-    title: '12%',
-    dataIndex: 'rate_12',
-    key: 'rate_12',
-  },
-  {
-    title: '13%',
-    dataIndex: 'rate_13',
-    key: 'rate_13',
-  },
-  {
-    title: '14%',
-    dataIndex: 'rate_14',
-    key: 'rate_14',
-  },
-  {
-    title: '15%',
-    dataIndex: 'rate_15',
-    key: 'rate_15',
-  },
-];
-
-const dataSource_PA = [
-  {
-    key: '1',
-    Year_data: '1.000',
-    rate_6: 0.943,
-    rate_7: 0.935,
-    rate_8: 0.926,
-    rate_9: 0.917,
-    rate_10:0.909,
-    rate_11:0.901,
-    rate_12:0.893,
-    rate_13:0.885,
-    rate_14:0.877,
-    rate_15:0.870,
-  },
-  {
-    key: '2',
-    Year_data: '2.000',
-    rate_6: 1.833,
-    rate_7: 1.808,
-    rate_8: 1.783,
-    rate_9: 1.759,
-    rate_10:1.736,
-    rate_11:1.713,
-    rate_12:1.690,
-    rate_13:1.668,
-    rate_14:1.647,
-    rate_15:1.626,
-  },
-  {
-    key: '3',
-    Year_data: '3.000',
-    rate_6: 2.673,
-    rate_7: 2.624,
-    rate_8: 2.577,
-    rate_9: 2.531,
-    rate_10:2.487,
-    rate_11:2.444,
-    rate_12:2.402,
-    rate_13:2.361,
-    rate_14:2.322,
-    rate_15:2.283,
-  },
-  {
-    key: '4',
-    Year_data: '4.000',
-    rate_6: 3.465,
-    rate_7: 3.387,
-    rate_8: 3.312,
-    rate_9: 3.240,
-    rate_10:3.170,
-    rate_11:3.102,
-    rate_12:3.037,
-    rate_13:2.975,
-    rate_14:2.914,
-    rate_15:2.855,
-  },
-  {
-    key: '5',
-    Year_data: '5.000',
-    rate_6: 4.212,
-    rate_7: 4.100,
-    rate_8: 3.993,
-    rate_9: 3.890,
-    rate_10:3.791,
-    rate_11:3.696,
-    rate_12:3.605,
-    rate_13:3.517,
-    rate_14:3.433,
-    rate_15:3.352,
-  },
-  {
-    key: '6',
-    Year_data: '6.000',
-    rate_6: 4.917,
-    rate_7: 4.767,
-    rate_8: 4.623,
-    rate_9: 4.486,
-    rate_10:4.355,
-    rate_11:4.231,
-    rate_12:4.111,
-    rate_13:3.998,
-    rate_14:3.889,
-    rate_15:3.785,
-  },
-  {
-    key: '7',
-    Year_data: '7.000',
-    rate_6: 5.582,
-    rate_7: 5.389,
-    rate_8: 5.206,
-    rate_9: 5.033,
-    rate_10:4.868,
-    rate_11:4.712,
-    rate_12:4.564,
-    rate_13:4.423,
-    rate_14:4.288,
-    rate_15:4.160,
-  },
-  {
-    key: '8',
-    Year_data: '8.000',
-    rate_6: 6.210,
-    rate_7: 5.971,
-    rate_8: 5.747,
-    rate_9: 5.535,
-    rate_10:5.335,
-    rate_11:5.146,
-    rate_12:4.968,
-    rate_13:4.799,
-    rate_14:4.639,
-    rate_15:4.487,
-  },
-];
-
-const dataSource_PF = [
-  {
-    key: '1',
-    Year_data: '1.000',
-    rate_6: 0.9434,
-    rate_7: 0.9346,
-    rate_8: 0.9259,
-    rate_9: 0.9174,
-    rate_10:0.9091,
-    rate_11:0.9009,
-    rate_12:0.8929,
-    rate_13:0.8850,
-    rate_14:0.8772,
-    rate_15:0.8696,
-  },
-  {
-    key: '2',
-    Year_data: '2.000',
-    rate_6: 0.8900,
-    rate_7: 0.8734,
-    rate_8: 0.8573,
-    rate_9: 0.8417,
-    rate_10:0.8264,
-    rate_11:0.8116,
-    rate_12:0.7972,
-    rate_13:0.7831,
-    rate_14:0.7695,
-    rate_15:0.7561,
-  },
-  {
-    key: '3',
-    Year_data: '3.000',
-    rate_6: 0.8396,
-    rate_7: 0.8163,
-    rate_8: 0.7938,
-    rate_9: 0.7722,
-    rate_10:0.7513,
-    rate_11:0.7312,
-    rate_12:0.7118,
-    rate_13:0.6931,
-    rate_14:0.6750,
-    rate_15:0.6575,
-  },
-  {
-    key: '4',
-    Year_data: '4.000',
-    rate_6: 0.7921,
-    rate_7: 0.7629,
-    rate_8: 0.7350,
-    rate_9: 0.7084,
-    rate_10:0.6830,
-    rate_11:0.6587,
-    rate_12:0.6355,
-    rate_13:0.6133,
-    rate_14:0.5921,
-    rate_15:0.5718,
-  },
-  {
-    key: '5',
-    Year_data: '5.000',
-    rate_6: 0.7473,
-    rate_7: 0.7130,
-    rate_8: 0.6806,
-    rate_9: 0.6499,
-    rate_10:0.6209,
-    rate_11:0.5935,
-    rate_12:0.5674,
-    rate_13:0.5428,
-    rate_14:0.5194,
-    rate_15:0.4972,
-  },
-  {
-    key: '6',
-    Year_data: '6.000',
-    rate_6: 0.7050,
-    rate_7: 0.6663,
-    rate_8: 0.6302,
-    rate_9: 0.5963,
-    rate_10:0.5645,
-    rate_11:0.5346,
-    rate_12:0.5066,
-    rate_13:0.4803,
-    rate_14:0.4556,
-    rate_15:0.4323,
-  },
-  {
-    key: '7',
-    Year_data: '7.000',
-    rate_6: 0.6651,
-    rate_7: 0.6227,
-    rate_8: 0.5835,
-    rate_9: 0.5470,
-    rate_10:0.5132,
-    rate_11:0.4817,
-    rate_12:0.4523,
-    rate_13:0.4251,
-    rate_14:0.3996,
-    rate_15:0.3759,
-  },
-  {
-    key: '8',
-    Year_data: '8.000',
-    rate_6: 0.6274,
-    rate_7: 0.5820,
-    rate_8: 0.5403,
-    rate_9: 0.5019,
-    rate_10:0.4665,
-    rate_11:0.4339,
-    rate_12:0.4039,
-    rate_13:0.3762,
-    rate_14:0.3506,
-    rate_15:0.3269,
-  },
-];
 export default {
-setup() {
-
-    return {
-      data,
-      columns,
-      columns_PA,
-      dataSource_PA,
-      dataSource_PF,
-    };
-  },
-    name: 'Exp7_SHENGMINGZHOUQI',
+    name: 'Exp1_IFPUG',
     data() {
         return {
-            test: '0',
+            test: '21111',
             SUM: 0,
             VAF: 0,
-            columns: [     
-                       {
-                                    title: '序号',
-                                    dataIndex: 'B',
-                                    align: 'center',
-                                     width: 100,
-                            },
-                           {
-                    
-                                    title: 'Salvage Value If Retired at Year n',
-                                    width: 160,
+            SUM_A: 0,
+            columns1: [
+                {
+                    title: '记录元素类型(RET) ',
+                    dataIndex: 'RET',
+                    key: 'type',
+                    align: 'center',
+                    width: 400,
+                    // fixed: 'left',
+                },
+                {
+                    title: '数据元素类型(DET)',
+                    children: [
+                        {
+                            title: '1-19',
+                            dataIndex: 'left',
+                            key: '1-19',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                        {
+                            title: '20-50',
+                            dataIndex: 'mide',
+                            key: '20-50',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                        {
+                            title: '>50',
+                            key: '50',
+                            dataIndex: 'right',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                    ]
+                }
+
+            ],
+            columns2: [{
+                title: '引用的文件类型个数(FTR) ',
+                dataIndex: 'FTR',
+                key: 'type',
+                align: 'center',
+                width: 400,
+                // fixed: 'left',
+            },
+            {
+                title: '数据元素类型(DET)',
+                children: [
+                    {
+                        title: '1-4',
+                        dataIndex: 'left',
+                        key: 'type',
+                        align: 'center'
+                        // width: 30,
+                        // fixed: 'left',
+                    },
+                    {
+                        title: '5-15',
+                        dataIndex: 'mide',
+                        key: 'type',
+                        align: 'center'
+                        // width: 30,
+                        // fixed: 'left',
+                    },
+                    {
+                        title: '>15',
+                        dataIndex: 'right',
+                        key: 'type',
+                        align: 'center'
+                        // width: 30,
+                        // fixed: 'left',
+                    },
+                ]
+            }
+            ],
+            columns3: [
+                {
+                    title: '引用的文件类型个数(FTR) ',
+                    dataIndex: 'FTR',
+                    key: 'type',
+                    align: 'center',
+                    width: 400,
+                    // fixed: 'left',
+                },
+                {
+                    title: '数据元素类型(DET)',
+                    children: [
+                        {
+                            title: '1-5',
+                            dataIndex: 'left',
+                            key: 'type',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                        {
+                            title: '6-19',
+                            dataIndex: 'mide',
+                            key: 'type',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                        {
+                            title: '>19',
+                            dataIndex: 'right',
+                            key: 'type',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                    ]
+                }
+            ],
+            columns4: [
+                {
+                    title: '类型 ',
+                    dataIndex: 'type',
+                    key: 'type',
+                    align: 'center',
+                    width: 400,
+                    // fixed: 'left',
+                },
+                {
+                    title: '复杂度级别',
+                    children: [
+                        {
+                            title: '简单',
+                            dataIndex: 'easy',
+                            key: 'type',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                        {
+                            title: '平均',
+                            dataIndex: 'mide',
+                            key: 'type',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                        {
+                            title: '复杂',
+                            dataIndex: 'complex',
+                            key: 'type',
+                            align: 'center'
+                            // width: 30,
+                            // fixed: 'left',
+                        },
+                    ]
+                }
+            ],
+            columns: [
+                {
+                    title: '组件',
+                    dataIndex: 'component',
+                    key: 'component',
+                    align: 'center'
+                    // width: 30,
+                    // fixed: 'left',
+                },
+                {
+                    title: '数量',
+                    dataIndex: 'number',
+                    key: 'number',
+                    align: 'center'
+                    // width: 30,
+                    // fixed: 'left',
+                },
+                {
+                    title: '复杂度',
+                    children: [
+                        {
+                            title: '简单',
+                            align: 'center',
+                            children: [{
+                                title: '计数',
+                                align: 'center',
+                                children: [{
+                                    title: 'A',
+                                    // width: 30,
                                     dataIndex: 'A',
                                     align: 'center'
+                                }],
                             },
                             {
-                                    title: 'AE(i) Cost If Retired in Year n [CR(i)]',
-                                    dataIndex: 'C',
-                                    width: 160,
+                                title: '权重',
+                                align: 'center',
+                                children: [{
+                                    title: 'B',
+                                    dataIndex: 'B',
                                     align: 'center',
+                                    // width: 30,
+                                }],
+                            },
+                            {
+                                title: '功能点数',
+                                align: 'center',
+                                children: [{
+                                    title: 'C=A*B',
+                                    align: 'center',
+                                    dataIndex: 'C',
+                                    // width: 30,
+                                }],
+                            }
+                            ],
                         },
                         {
+                            title: '平均',
+                            align: 'center',
+                            children: [{
+                                title: '计数', children: [{
                                     align: 'center',
                                     dataIndex: 'D',
-                                    title: 'O & M Costs for Year n',
-                                     width: 100,
+                                    title: 'D',
+                                    // width: 30,
+                                }],
                             },
                             {
+                                title: '权重',
+                                align: 'center',
+                                children: [{
                                     dataIndex: 'E',
                                     align: 'center',
-                                    title: 'PW(i) of O&M for Year n in Year 0',
-                                    width: 160,
+                                    title: 'E',
+                                    // width: 30,
+                                }],
                             },
                             {
-                               
+                                title: '功能点数',
+                                align: 'center',
+                                children: [{
                                     dataIndex: 'F',
-                                    title: 'Sum of Year 0 O&Ms through Year n',
+                                    title: 'F=D*E',
                                     align: 'center',
-                                    width: 160,
+                                    // width: 30,
+                                }],
+                            }],
                         },
                         {
+                            title: '复杂',
+                            align: 'center',
+                            children: [{
+                                title: '计数',
+                                align: 'center',
+                                children: [{
                                     dataIndex: 'G',
                                     align: 'center',
-                                    title: 'AE(i) Cost of Operating for n Years',
-                                     width: 160,
+                                    title: 'G',
+                                    // width: 30,
+                                }],
                             },
-                         
+                            {
+                                title: '权重',
+                                align: 'center',
+                                children: [{
+                                    dataIndex: 'H',
+                                    align: 'center',
+                                    title: 'H',
+                                    // width: 30,
+                                }],
+                            },
+                            {
+                                title: '功能点数',
+                                align: 'center',
+                                children: [{
+                                    dataIndex: 'I',
+                                    title: 'I=G*H',
+                                    align: 'center',
+                                    // width: 30,
+                                }],
+                            }],
+                        },
+
+                    ]
+                },
                 {
-                    title: 'Total AE(i) If Retired at Year n',
+                    title: '未调整功能点数',
                     dataIndex: 'unchanged',
                     key: 'unchanged',
                     align: 'center',
-                    //  width: 100,
+                    // width: 800,
                     // fixed: 'right',
                 },
             ],
-          
+            columnsadjust: [
+                {
+                    title: '序号',
+                    dataIndex: 'index',
+                    key: 'component',
+                    align: 'center',
+                    width: 100
+                    // fixed: 'left',
+                },
+                {
+                    title: '因子',
+                    dataIndex: 'title',
+                    key: 'component',
+                    align: 'center',
+                    width: 900,
+                    // fixed: 'left',
+                },
+                {
+                    title: '等级',
+                    dataIndex: 'grade',
+                    key: 'component',
+                    align: 'center'
+                    // width: 30,
+                    // fixed: 'left',
+                },
+            ],
+            tableData1: [
+                {
+                    RET: '1',
+                    left: '简单',
+                    mide: '简单',
+                    right: '平均'
+
+                },
+                {
+                    RET: '2~4',
+                    left: '简单',
+                    mide: '平均',
+                    right: '复杂'
+
+                },
+                {
+                    RET: '>5',
+                    left: '平均',
+                    mide: '复杂',
+                    right: '复杂'
+
+                }
+            ],
+            tableData2: [
+                {
+                    FTR: '0~1',
+                    left: '简单',
+                    mide: '简单',
+                    right: '平均'
+                },
+                {
+                    FTR: '2',
+                    left: '简单',
+                    mide: '平均',
+                    right: '复杂'
+                },
+                {
+                    FTR: '>2',
+                    left: '平均',
+                    mide: '复杂',
+                    right: '复杂'
+                }
+
+            ],
+            tableData3: [
+                {
+                    FTR: '0~1',
+                    left: '简单',
+                    mide: '简单',
+                    right: '平均'
+                },
+                {
+                    FTR: '2~3',
+                    left: '简单',
+                    mide: '平均',
+                    right: '复杂'
+                },
+                {
+                    FTR: '>3',
+                    left: '平均',
+                    mide: '复杂',
+                    right: '复杂'
+                }
+            ],
+            tableData4: [
+                {
+                    type: 'ILF',
+                    easy: 'X7',
+                    mide: 'X10',
+                    complex: 'X15'
+                },
+                {
+                    type: 'EIF',
+                    easy: 'X5',
+                    mide: 'X7',
+                    complex: 'X10'
+                },
+                {
+                    type: 'EI',
+                    easy: 'X3',
+                    mide: 'X4',
+                    complex: 'X6'
+                },
+                {
+                    type: 'EO',
+                    easy: 'X4',
+                    mide: 'X5',
+                    complex: 'X7'
+                },
+                {
+                    type: 'EQ',
+                    easy: 'X3',
+                    mide: 'X4',
+                    complex: 'X6'
+                }
+            ],
             tableData: [
                 {
-                    component: '1',
-                    number: '',
-                    A: '',
-                    B: '1',
-                    C: '',
-                    D: '',
-                    E: '',
-                    F: '',
-                    G: '',
-                    
-                    unchanged: '',
-                },
-                {
-                    component: '2',
-                    number: '',
-                    A: '',
-                    B: '2',
-                    C: '',
-                    D: '',
-                    E: '',
-                    F: '',
-                    G: '',
-                    
-                    unchanged: '',
-                },
-                {
-                    component: '3',
+                    component: 'EI',
                     number: '',
                     A: '',
                     B: '3',
                     C: '',
                     D: '',
-                    E: '',
+                    E: '4',
                     F: '',
                     G: '',
-                   
+                    H: '6',
+                    I: '',
                     unchanged: '',
                 },
                 {
-                    component: '4',
+                    component: 'EO',
                     number: '',
                     A: '',
                     B: '4',
                     C: '',
                     D: '',
-                    E: '',
+                    E: '5',
                     F: '',
                     G: '',
-                  
+                    H: '7',
+                    I: '',
                     unchanged: '',
                 },
                 {
-                    component: '5',
+                    component: 'EQ',
                     number: '',
                     A: '',
-                    B: '5',
+                    B: '3',
                     C: '',
                     D: '',
-                    E: '',
+                    E: '4',
                     F: '',
                     G: '',
-                   
+                    H: '6',
+                    I: '',
                     unchanged: '',
                 },
-                 {
-                    component: '6',
-                    number: '',
-                    A: '',
-                    B: '6',
-                    C: '',
-                    D: '',
-                    E: '',
-                    F: '',
-                    G: '',
-                    unchanged: '',
-                },
-                 {
-                    component: '7',
+                {
+                    component: 'ILF',
                     number: '',
                     A: '',
                     B: '7',
                     C: '',
                     D: '',
-                    E: '',
+                    E: '10',
                     F: '',
                     G: '',
+                    H: '15',
+                    I: '',
                     unchanged: '',
                 },
-                 {
-                    component: '8',
+                {
+                    component: 'EIF',
                     number: '',
                     A: '',
-                    B: '8',
+                    B: '5',
                     C: '',
                     D: '',
-                    E: '',
+                    E: '7',
                     F: '',
                     G: '',
+                    H: '10',
+                    I: '',
                     unchanged: '',
                 },
             ],
+            dataadjust: [
+                {
+                    index: '1',
+                    title: 'Requirement for reliable backup and recovery ',
+                    grade: ''
+
+                },
+                {
+                    index: '2',
+                    title: 'Requirement for data communication',
+                    grade: ''
+
+                },
+                {
+                    index: '3',
+                    title: 'Extent of distributed processing ',
+                    grade: ''
+
+                },
+                {
+                    index: '4',
+                    title: 'Performance requirements ',
+                    grade: ''
+
+                },
+                {
+                    index: '5',
+                    title: 'Expected operational environment ',
+                    grade: ''
+
+                },
+                {
+                    index: '6',
+                    title: 'Extent of online data entries ',
+                    grade: ''
+
+                },
+                {
+                    index: '7',
+                    title: 'Extent of multi-screen or multi-operation online data input ',
+                    grade: ''
+
+                },
+                {
+                    index: '8',
+                    title: 'Extent of online updating of master files ',
+                    grade: ''
+
+                },
+                {
+                    index: '9',
+                    title: 'Extent of complex inputs, outputs, online queries and files ',
+                    grade: ''
+
+                },
+                {
+                    index: '10',
+                    title: 'Extent of complex data processing ',
+                    grade: ''
+
+                },
+                {
+                    index: '11',
+                    title: 'Extent that currently developed code can be designed for reuse ',
+                    grade: ''
+
+                },
+                {
+                    index: '12',
+                    title: 'Extent of conversion and installation included in the design ',
+                    grade: ''
+
+                },
+                {
+                    index: '13',
+                    title: 'Extent of multiple installations in an organization and variety of customer organizations ',
+                    grade: ''
+
+                },
+                {
+                    index: '14',
+                    title: 'Extent of change and focus on ease of use ',
+                    grade: ''
+
+                },
+            ]
         }
     },
     computed: {
         c() {
             return function (index) {
-                let PAnum = 0
-                let rate = 1.12
-                let rate_i = 1
-                for (let i = 0; i < parseInt(this.tableData[index].B); i++){
-                    rate_i = 1
-                    for(let j = 0; j <= i; j++){
-                        rate_i = rate_i * rate
-                    }
-                    PAnum = PAnum + 1 / rate_i
-                }
                 console.log(typeof index)
-                this.tableData[index].C =  ((parseInt(this.tableData[index].D)) ? (10000 - parseInt(this.tableData[index].A)) / PAnum + parseInt(this.tableData[index].A) * (rate - 1) : 0)
-                return this.tableData[index].C.toFixed(0)
-            }
-        },
-         e() {
-            return function (index) {
-                console.log(typeof index)
-                let j=1.12
-                let n=1
-                for(let i=0;i<parseInt(this.tableData[index].B);i++){
-                    n=n*j
-                }
-                this.tableData[index].E = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].D) : 0) /n
-                return this.tableData[index].E.toFixed(0)
+                this.tableData[index].C = (parseInt(this.tableData[index].A) ? parseInt(this.tableData[index].A) : 0) * parseInt(this.tableData[index].B)
+                return this.tableData[index].C
             }
         },
         f() {
             return function (index) {
-              if(parseInt(this.tableData[index].B)==1){
-                this.tableData[index].F = (this.tableData[index].E ? this.tableData[index].E : 0) 
-                return this.tableData[index].F.toFixed(0)
-                }
-                else
-                {
-                 this.tableData[index].F = (this.tableData[index].D ? this.tableData[index].E : 0) + this.tableData[index-1].F
-                 return this.tableData[index].F.toFixed(0)
-                }
-                
-            }
-        },
-        g() {
-            return function (index) {
-                let PAnum = 0
-                let rate = 1.12
-                let rate_i = 1
-                for (let i = 0; i < parseInt(this.tableData[index].B); i++){
-                    rate_i = 1
-                    for(let j = 0; j <= i; j++){
-                        rate_i = rate_i * rate
-                    }
-                    PAnum = PAnum + 1 / rate_i
-                }
-                this.tableData[index].G =(this.tableData[index].F ? this.tableData[index].F : 0) / PAnum
-                return this.tableData[index].G.toFixed(0)
+                this.tableData[index].F = (parseInt(this.tableData[index].D) ? parseInt(this.tableData[index].D) : 0) * parseInt(this.tableData[index].E)
+                return this.tableData[index].F
             }
         },
         i() {
             return function (index) {
                 this.tableData[index].I = (parseInt(this.tableData[index].G) ? parseInt(this.tableData[index].G) : 0) * parseInt(this.tableData[index].H)
-                return this.tableData[index].I.toFixed(0)
+                return this.tableData[index].I
             }
         },
         number() {
@@ -700,45 +789,133 @@ setup() {
         },
         unchanged() {
             return function (index) {
-                this.tableData[index].unchanged = (parseInt(this.tableData[index].C) ? parseInt(this.tableData[index].C) : 0) + (parseInt(this.tableData[index].G) ? parseInt(this.tableData[index].G) : 0)
+                this.tableData[index].unchanged = (parseInt(this.tableData[index].C) ? parseInt(this.tableData[index].C) : 0) + (parseInt(this.tableData[index].F) ? parseInt(this.tableData[index].F) : 0) + (parseInt(this.tableData[index].I) ? parseInt(this.tableData[index].I) : 0)
 
-                var arr = [this.tableData[0].unchanged,this.tableData[1].unchanged,this.tableData[2].unchanged,this.tableData[3].unchanged,
-                           this.tableData[4].unchanged,this.tableData[5].unchanged,this.tableData[6].unchanged,this.tableData[7].unchanged];
-                this.$data.SUM = Math.min(...arr)
+                var sum = 0
+                for (var i = 0; i < 5; i++)
+                    sum += (parseInt(this.tableData[i].unchanged) ? parseInt(this.tableData[i].unchanged) : 0)
+                this.$data.SUM = sum
 
-                return this.tableData[index].unchanged.toFixed(0)
+                return this.tableData[index].unchanged
             }
         },
+        VAF() {
+            var vaf = 0
+            // console.log('111',this.$data.tableData)
+            for (var i = 0; i < 14; i++)
+                vaf += (parseInt(this.dataadjust[i].grade) ? parseInt(this.dataadjust[i].grade) : 0)
+            
+            vaf = vaf*0.01 + 0.65
+            this.$data.VAF = vaf.toFixed(2)
+            return vaf
+        },
+        SUM_A(){
+            var sum = 0
+            for (var i = 0; i < 14; i++)
+                sum += (parseInt(this.dataadjust[i].grade) ? parseInt(this.dataadjust[i].grade) : 0)
+            return sum
+        },
+        ALL() {
+            return (this.$data.SUM * this.$data.VAF).toFixed(2)
+        }
     },
     methods: {
+        created() {
+            this.gettableData()
+        },
+        updated() {
+            // 用于防止表格合计行不显示
+            this.$nextTick(() => {
+                this.$refs['detailTable'].doLayout();
+            })
+        },
+        pdfHandle() {
+            window.open('/#/show', "_blank")
+        },
+        pdfHandle2() {
+            window.open('/#/show', "_blank")
+        },
+        getSummaries(param, val) {
+            const { columns, data } = param;
+            const sums = [];
+            columns.forEach((column, index) => {
+                if (index === 0) {
+                    sums[index] = (() => {
+                        // let el=<p>未调整功能点</p>
+                    })();
+                    return;
+                }
+                if (index === 11) {
+                    sums[index] = (() => {
+                        // let num=<p >￥{this.tableData[val].nonum.toFixed(2)}</p>
+                        // return num;
+                    })();
+                    return;
+                }
+            });
+            return sums;
+        },
+        count() {
+        },
     }
 }
-
-
 </script>
 
 <style scoped>
-.button3 {
-
-float: right;
-margin-top: 10px;
-margin-right: 50px;
-
+.title {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 30px;
 }
-
 
 .secondtitle {
-    text-indent: 2em;   /* 首行缩进两字符2em */
-    font-weight: bold;  /* 加粗 */
-    margin-left: 20px;  /* 左边缘50px */
+    text-indent: 2em;
+    font-weight: bold;
+    margin-left: 30px;
     margin-right: 30px;
-    font-size: 17px;
 }
 
-.text {
+.maintable {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 30px;
+}
+
+.button1 {
+    margin-left: 25px;
+}
+
+.button2 {
+    margin-left: 15px;
+}
+
+.button3 {
+
+    float: right;
+    margin-top: 10px;
+    margin-right: 50px;
+
+}
+
+.button4 {
+
+    margin-left: 250px;
+
+}
+
+.content {
     text-indent: 2em;
     margin-left: 20px;
     margin-right: 20px;
-    font-size: 17px;
+}
+
+.guidance {
+    position: absolute;
+    right: 50px;
+    font-weight: bold;
+}
+
+:deep(.ant-table .ant-table-thead > tr > th) {
+    border-width: 1px;
 }
 </style> 
