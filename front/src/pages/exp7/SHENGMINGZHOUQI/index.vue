@@ -3,25 +3,7 @@
   <p class="text">软件经济生命周期计算是一种用于评估软件产品在其整个生命周期中的经济效益和成本的方法。该实验的目的是通过进行软件经济生命周期计算，
                    以评估软件产品的经济可行性，并为软件开发和维护过程中的决策提供依据。
                     </P>
-  <h2>二、实验内容  </h2>
-  <p class="text">步骤1: 确定资本回收 CR(i) 和运维费用 O&M Cost 的相关值和对应系数。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤2: 使用计算公式计算资本回收 CR(i)：CR(i) = (P - F) * (A/P,i,n) + F * i
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤3: 填写表格，记录每个年份的残值 （Salvage Value If Retired at Year n）、资本回收 CR(i) 、年度运维费用（O & M Costs for Year n）和折现的运维费用 PW(i) of O&M for Year n in Year 0 。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤4: 计算每个年份的运维成本的累加值（Sum of Year 0 O&Ms through Year n）和运维成本的折现值 AE(i) Cost of Operating for n Years 。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤5: 计算每个年份的总经济成本（Total AE(i) If Retired at Year n），即运维成本和资本回收的和。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤6: 找到总经济成本最小的年份，即为所求软件的生命周期年份。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤7: 将计算结果填入表格，并分析结果。分析实验结果，根据最佳收益年份，评估软件产品的经济可行性。撰写实验报告，包括实验目的、步骤、结果分析和结论。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </p>
-                    <!-- 在了解软件生命周期定义的基础上，理解软件的成本与利润如何受到影响，根据相关值与对应系数，计算出资本回收与运维费用，填入表格，
-                       找到和为最小值，即最佳收益的年份，得到所求软件的生命周期。 -->
-  <h2>三、实验原理  </h2>
+  <h2>二、实验原理  </h2>
     <p class="secondtitle">1.软件生命周期</p>
     <p class="text">软件生命周期(Software Life Cycle,SLC)是软件的产生直到报废或停止使用的生命周期。周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、
                     验收与运行、维护升级到废弃等阶段，这种按时间分程的思想方法是软件工程中的一种思想原则，即按部就班、逐步推进，每个阶段都要有定义、工作、审查、
@@ -67,22 +49,22 @@
       pagination="false"
     />
 
-  <h2>四、实验步骤  </h2>
-  <p class="text">步骤1: 确定资本回收 CR(i) 和运维费用 O&M Cost 的相关值和对应系数。
+  <h2>三、实验步骤和实验内容  </h2>
+  <p class="text">步骤1: 确定每个年份的残值（Salvage Value If Retired at Year n）、运维费用 O&M Cost 的相关值和对应系数，填写表格。
+                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  请输入年收益率 i = 
+                  <a-input v-model:value="RATE" style="width:100px;" />
                   <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤2: 使用计算公式计算资本回收 CR(i)：CR(i) = (P - F) * (A/P,i,n) + F * i
+                  步骤2: 使用公式计算资本回收 CR(i)、折现的运维费用 PW(i) of O&M for Year n in Year 0。
                   <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤3: 填写表格，记录每个年份的残值 （Salvage Value If Retired at Year n）、资本回收 CR(i) 、年度运维费用（O & M Costs for Year n）和折现的运维费用 PW(i) of O&M for Year n in Year 0 。
+                  步骤3: 计算每个年份的运维成本的累加值（Sum of Year 0 O&Ms through Year n）和运维成本的折现值 AE(i) Cost of Operating for n Years。
                   <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤4: 计算每个年份的运维成本的累加值（Sum of Year 0 O&Ms through Year n）和运维成本的折现值 AE(i) Cost of Operating for n Years 。
+                  步骤4: 计算每个年份的总经济成本（Total AE(i) If Retired at Year n），即运维成本和资本回收的和 。
                   <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤5: 计算每个年份的总经济成本（Total AE(i) If Retired at Year n），即运维成本和资本回收的和。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤6: 找到总经济成本最小的年份，即为所求软件的生命周期年份。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  步骤7: 将计算结果填入表格，并分析结果。分析实验结果，根据最佳收益年份，评估软件产品的经济可行性。撰写实验报告，包括实验目的、步骤、结果分析和结论。
-                  <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  以下表格为步骤1-4的具体展示：
                   </p>
+                  <!-- 在了解软件生命周期定义的基础上，理解软件的成本与利润如何受到影响，根据相关值与对应系数，计算出资本回收与运维费用，填入表格，
+                       找到和为最小值，即最佳收益的年份，得到所求软件的生命周期。 -->
   <a-table :pagination="false" :columns="columns" :data-source="tableData" bordered size="middle" style="word-break: break-all;">
         <template #bodyCell="{ column, record, index }">
             <template v-if="column.dataIndex === 'A' && tableData!==undefined">
@@ -116,23 +98,19 @@
     </a-table>
     <br>
 
-    <div style="width:100%;text-align:right" >
-        <span  style="width:30%;display:inline-block" class="secondtitle">本实验最佳收益为:  </span>
-        <span style="display:inline-block;font-size:20px;" >{{ SUM }}</span>
-    </div>
-    <br>
-    <br>
-   
+    <p class="text">
+        步骤5: 分析表格，找出产品生命周期。年最低成本: {{ SUM }}，产品生命周期: {{ Year }}
+        <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        步骤6: 分析实验结果，根据产品生命周期，评估其经济可行性；撰写实验报告，包括实验目的、原理、步骤、结果和思考。
+    </p>
 
-
-
-  <h2>五、实验结果  </h2>
-  <p class="text">通过实验步骤计算，得到表格数据。其中成本最低，最佳收益值为:
+  <h2>四、实验结果  </h2>
+  <p class="text">年最低成本:  {{ SUM }}
   </P>
-  <p class="text">最佳收益的年份为:
- </P>
+  <p class="text">产品生命周期:  {{ Year }}
+  </P>
 
-  <h2>六、实验思考  </h2>
+  <h2>五、实验思考  </h2>
   <p class="text">软件生命周期又称为软件生存周期或系统开发生命周期，是软件的产生直到报废的生命周期，
     周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、验收与运行、维护升级到废弃等阶段，
     这种按时间分程的思想方法是软件工程中的一种思想原则，即按部就班、逐步推进，每个阶段都要有定义、工作、
@@ -479,23 +457,25 @@ setup() {
         return {
             test: '0',
             SUM: 0,
+            Year: 0,
+            RATE: 0,
             VAF: 0,
             columns: [     
                        {
                                     title: '序号',
                                     dataIndex: 'B',
                                     align: 'center',
-                                     width: 100,
+                                     width: 75,
                             },
                            {
                     
-                                    title: 'Salvage Value If Retired at Year n',
+                                    title: 'Salvage Value If Retired at Year n (step 1)',
                                     width: 160,
                                     dataIndex: 'A',
                                     align: 'center'
                             },
                             {
-                                    title: 'AE(i) Cost If Retired in Year n [CR(i)]',
+                                    title: 'AE(i) Cost If Retired in Year n [CR(i)] (step 2)',
                                     dataIndex: 'C',
                                     width: 160,
                                     align: 'center',
@@ -503,31 +483,31 @@ setup() {
                         {
                                     align: 'center',
                                     dataIndex: 'D',
-                                    title: 'O & M Costs for Year n',
+                                    title: 'O & M Costs for Year n (step 1)',
                                      width: 100,
                             },
                             {
                                     dataIndex: 'E',
                                     align: 'center',
-                                    title: 'PW(i) of O&M for Year n in Year 0',
+                                    title: 'PW(i) of O&M for Year n in Year 0 (step 2)',
                                     width: 160,
                             },
                             {
                                
                                     dataIndex: 'F',
-                                    title: 'Sum of Year 0 O&Ms through Year n',
+                                    title: 'Sum of Year 0 O&Ms through Year n (step 3)',
                                     align: 'center',
                                     width: 160,
                         },
                         {
                                     dataIndex: 'G',
                                     align: 'center',
-                                    title: 'AE(i) Cost of Operating for n Years',
+                                    title: 'AE(i) Cost of Operating for n Years (step 3)',
                                      width: 160,
                             },
                          
                 {
-                    title: 'Total AE(i) If Retired at Year n',
+                    title: 'Total AE(i) If Retired at Year n (step 4)',
                     dataIndex: 'unchanged',
                     key: 'unchanged',
                     align: 'center',
@@ -644,8 +624,9 @@ setup() {
     computed: {
         c() {
             return function (index) {
+
                 let PAnum = 0
-                let rate = 1.12
+                let rate = 1 + parseFloat(this.RATE)
                 let rate_i = 1
                 for (let i = 0; i < parseInt(this.tableData[index].B); i++){
                     rate_i = 1
@@ -662,8 +643,8 @@ setup() {
          e() {
             return function (index) {
                 console.log(typeof index)
-                let j=1.12
-                let n=1
+                let j =  1 + parseFloat(this.RATE)
+                let n = 1
                 for(let i=0;i<parseInt(this.tableData[index].B);i++){
                     n=n*j
                 }
@@ -688,7 +669,7 @@ setup() {
         g() {
             return function (index) {
                 let PAnum = 0
-                let rate = 1.12
+                let rate =  1 + parseFloat(this.RATE)
                 let rate_i = 1
                 for (let i = 0; i < parseInt(this.tableData[index].B); i++){
                     rate_i = 1
@@ -721,11 +702,21 @@ setup() {
                            this.tableData[4].unchanged,this.tableData[5].unchanged,this.tableData[6].unchanged,this.tableData[7].unchanged];
                 this.$data.SUM = Math.min(...arr)
 
+                let flag = 1
+                for (let i = 0; i < parseInt(this.tableData[index].B), flag; i++){
+                  if(this.tableData[i].unchanged == Math.min(...arr) ){
+                    flag = 0
+                    this.$data.Year = i + 1
+                  }
+                }
+
+
                 return this.tableData[index].unchanged.toFixed(0)
             }
         },
     },
     methods: {
+      
     }
 }
 
