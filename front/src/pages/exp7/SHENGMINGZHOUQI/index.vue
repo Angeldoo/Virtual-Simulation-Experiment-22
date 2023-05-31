@@ -38,17 +38,18 @@
       :data-source="dataSource_PA"
       bordered
       size="middle"
-      pagination="false"
+      :pagination="false"
     />
+    <br/>
     <p class="secondtitle">5.复利现值系数(P/F,i,n)表</p>
     <a-table
       :columns="columns_PA"
       :data-source="dataSource_PF"
       bordered
       size="middle"
-      pagination="false"
+      :pagination="false"
     />
-
+    <br/>
   <h2>三、实验步骤和实验内容  </h2>
   <p class="text">步骤1: 确定每个年份的残值（Salvage Value If Retired at Year n）、运维费用 O&M Cost 的相关值和对应系数，填写表格。
                   <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -99,7 +100,10 @@
     <br>
 
     <p class="text">
-        步骤5: 分析表格，找出产品生命周期。年最低成本: {{ SUM }}，产品生命周期: {{ Year }}
+        步骤5: 分析表格，找出产品生命周期。年最低成本:
+        <a-input v-model:value="sum" style="width:100px;" />
+        ，产品生命周期: 
+        <a-input v-model:value="year" style="width:100px;" />
         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         步骤6: 分析实验结果，根据产品生命周期，评估其经济可行性；撰写实验报告，包括实验目的、原理、步骤、结果和思考。
     </p>
@@ -111,14 +115,18 @@
   </P>
 
   <h2>五、实验思考  </h2>
-  <p class="text">软件生命周期又称为软件生存周期或系统开发生命周期，是软件的产生直到报废的生命周期，
+  <!--<p class="text">软件生命周期又称为软件生存周期或系统开发生命周期，是软件的产生直到报废的生命周期，
     周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、验收与运行、维护升级到废弃等阶段，
     这种按时间分程的思想方法是软件工程中的一种思想原则，即按部就班、逐步推进，每个阶段都要有定义、工作、
     审查、形成文档以供交流或备查，以提高软件的质量。
     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     根据实验结果，可以得到运维成本与资金回收之和，即Total AE（i），呈现出随年份先下降后上升的趋势，这是由
     逐渐降低的资本回收与折现过上升的运维成本共同影响决定。找出其中最佳收益及其年份，即得到软件的经济生命周期。
-  </P>
+  </P>-->
+  <div class="thoughts">
+       <textarea placeholder="请输入实验思考..."></textarea> 
+  </div>
+
   <a-button class="button3" type="primary" shape="round">
         <template >
             <DownloadOutlined />
@@ -130,6 +138,7 @@
 <script lang="ts">
 import { Document } from '@element-plus/icons-vue'
 import { defineComponent } from 'vue'
+
 
 const columns = [
    
@@ -460,6 +469,8 @@ setup() {
             Year: 0,
             RATE: 0,
             VAF: 0,
+            sum: 0,
+            year: 0,
             columns: [     
                        {
                                     title: '序号',
@@ -724,12 +735,34 @@ setup() {
 </script>
 
 <style scoped>
+textarea {
+    display: block;
+    width: 1024px;
+    height: 150px;
+    padding: 5px 10px;
+    margin: 30px auto 0;
+    resize: none;
+    line-height: 24px;
+    font-size: 16px;
+    color: #000;
+    border: 1px solid #ccc;
+    outline: 0 none;
+    box-shadow: 0 0 5px #000;
+    border-radius: 3px;
+    box-sizing: border-box;
+    transition: all 200ms linear;
+}
+
+textarea:focus {
+    color: #999;
+    border-color: #999;
+    box-shadow: 0 0 5px #999;
+}
+
 .button3 {
-
-float: right;
-margin-top: 10px;
-margin-right: 50px;
-
+  float: right;
+  margin-top: 10px;
+  margin-right: 50px;
 }
 
 
