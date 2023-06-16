@@ -109,12 +109,12 @@
     </p>
 
   <h2>四、实验结果  </h2>
-  <p class="text">年最低成本:  {{ SUM }}
+  <p class="text">年最低成本:  {{ SUM }}  元 
   </P>
-  <p class="text">产品生命周期:  {{ Year }}
+  <p class="text">产品生命周期:  {{ Year }}  年
   </P>
 
-  <h2>五、实验思考  </h2>
+  <h2>五、实验心得  </h2>
   <!--<p class="text">软件生命周期又称为软件生存周期或系统开发生命周期，是软件的产生直到报废的生命周期，
     周期内有问题定义、可行性分析、总体描述、系统设计、编码、调试和测试、验收与运行、维护升级到废弃等阶段，
     这种按时间分程的思想方法是软件工程中的一种思想原则，即按部就班、逐步推进，每个阶段都要有定义、工作、
@@ -124,7 +124,7 @@
     逐渐降低的资本回收与折现过上升的运维成本共同影响决定。找出其中最佳收益及其年份，即得到软件的经济生命周期。
   </P>-->
   <div class="thoughts">
-       <textarea placeholder="请输入实验思考..."></textarea> 
+       <textarea placeholder="请输入实验心得..."></textarea> 
   </div>
 
   <a-button class="button3" type="primary" shape="round">
